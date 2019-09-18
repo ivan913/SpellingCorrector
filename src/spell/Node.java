@@ -7,6 +7,7 @@ public class Node implements INode  {
 
     int count;
     private char value;
+    String word;
 
     TreeMap<Character, Node> nodes;
     private Node parent;
@@ -24,9 +25,10 @@ public class Node implements INode  {
         nodes = new TreeMap<Character,Node>();
     }
 
-    public void add(String letters){ //TODO: Test this
+    public void add(String letters, String newWord){ //TODO: Test this
         if(letters.length() == 0){
             count += 1;
+            word = newWord;
             return;
         }
 
@@ -39,8 +41,7 @@ public class Node implements INode  {
 
         String remainingLetters = letters.substring(1);
 
-        nodes.get(currentCharacter).add(remainingLetters);
-
+        nodes.get(currentCharacter).add(remainingLetters, newWord);
     }
 
     public Node find(String letters){
@@ -125,15 +126,29 @@ public class Node implements INode  {
     public int hashCode(){
         int hashCode = 12;
         if(count > 0){
-            hashCode = (hashCode * value)/count;
+            hashCode = (hashCode * value)/(count + 1);
         }
         for(Character c : nodes.keySet()){
             hashCode = (hashCode + (nodes.get(c).hashCode()));
         }
 
-        hashCode = hashCode/nodes.size();
+        hashCode = hashCode/(nodes.size() + 1);
 
         return hashCode;
     }
 
+    public String toString(){
+        StringBuilder builder = new StringBuilder();
+
+        if(count > 0){
+            builder.append(word);
+            builder.append('\n');
+        }
+
+        for(Character c : nodes.keySet()){
+            builder.append(nodes.get(c).toString());
+        }
+
+        return builder.toString();
+    }
 }

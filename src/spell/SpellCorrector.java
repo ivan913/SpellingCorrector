@@ -28,6 +28,8 @@ public class SpellCorrector implements ISpellCorrector {
 
     @Override
     public String suggestSimilarWord(String inputWord) {
+
+
         return null;
     }
 }

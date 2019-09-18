@@ -14,7 +14,7 @@ public class Trie implements ITrie {
         String lowerCaseWord = word.toLowerCase();
 
 
-        root.add(lowerCaseWord);
+        root.add(lowerCaseWord, lowerCaseWord);
     }
 
     @Override
@@ -48,6 +48,11 @@ public class Trie implements ITrie {
         int hash = root.hashCode();
 
         return hash;
+    }
+
+    @Override
+    public String toString(){
+        return root.toString();
     }
 
     public Node getRoot(){
