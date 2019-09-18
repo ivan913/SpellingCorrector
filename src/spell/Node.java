@@ -40,8 +40,26 @@ public class Node implements INode  {
 
     }
 
+    public Node find(String letters){
+        if(letters.length() == 0 && count > 0){
+            return this;
+        }
+
+        Character currentCharacter = letters.charAt(0);
+
+        if(!nodes.containsKey(currentCharacter)){
+            return null;
+        }
+
+        String remainingLetters = letters.substring(1);
+
+        Node returnNode = nodes.get(currentCharacter).find(remainingLetters);
+
+        return returnNode;
+    }
+
     @Override
     public int getValue() {
-        return value;
+        return count;
     }
 }
