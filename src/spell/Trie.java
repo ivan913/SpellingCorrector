@@ -8,13 +8,14 @@ public class Trie implements ITrie {
 
     Node root;
 
-    public Trie(File dictionary){
+    public Trie(){
         root = new Node();
     }
 
     @Override
     public void add(String word) {
-
+        String lowerCaseWord = word.toLowerCase();
+        root.add(lowerCaseWord);
     }
 
     @Override

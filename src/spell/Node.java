@@ -1,21 +1,43 @@
 package spell;
 
+import java.util.TreeMap;
+
 public class Node implements INode  {
-    boolean isRoot;
+    private boolean isRoot;
+
     int count;
-    String letters;
-    char value;
+    private char value;
 
-    Node[] children;
+    TreeMap<Character, Node> nodes;
+    private Node parent;
 
-    Node parent;
-
-    public Node(char letter, String word) {
+    public Node(char letter, Node parent) {
         value = letter;
-        letters = word;
         isRoot = false;
         count = 0;
-        children = new Node[26];
+        this.parent = parent;
+    }
+
+    public Node(){
+        isRoot = true;
+    }
+
+    public void add(String letters){ //TODO: Test this
+        if(letters.length() == 0){
+            count += 1;
+            return;
+        }
+
+        Character currentCharacter = letters.charAt(0);
+
+        if(!nodes.containsKey(currentCharacter)){
+            Node newNode = new Node(currentCharacter, this);
+        }
+
+        String remainingLetters = letters.substring(1);
+
+        nodes.get(currentCharacter).add(remainingLetters);
+
     }
 
     @Override
