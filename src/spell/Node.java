@@ -151,4 +151,8 @@ public class Node implements INode  {
 
         return builder.toString();
     }
+
+    public String getWord() {
+        return word;
+    }
 }
